@@ -13,6 +13,6 @@ socket.on('disconnect', function() {
 });
 
 socket.on('newMessage', function(message) {
-  console.log('New email is available.');
+  console.log('New message is available.');
   console.log(message);
 });
