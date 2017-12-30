@@ -4,7 +4,7 @@ socket.on('connect', function() {
 
   socket.emit('createMessage', {
     from: "Talk@charlesfried.com",
-    text: 'Hey, this is Charles'
+    body: 'Hey, this is Charles'
   });
 });
 
