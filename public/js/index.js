@@ -1,4 +1,24 @@
 var socket = io();
+
+function scrollToBottom() {
+  // Selector
+  var messages = $('#messages');
+  var newMessage = messages.children('li:last-child');
+  // Heights
+  var clientHeight = messages.prop('clientHeight');
+  var scrollTop = messages.prop('scrollTop');
+  var scrollHeight = messages.prop('scrollHeight');
+  var newMessageHeight = newMessage.innerHeight();
+  var lastMessageHeight = newMessage.prev().innerHeight();
+
+  if (clientHeight + scrollTop + newMessageHeight + lastMessageHeight >= scrollHeight) {
+    console.log('Should scroll');
+    messages.scrollTop(scrollHeight);
+  }
+
+}
+
+
 socket.on('connect', function() {
   console.log('Connected to server');
 });
@@ -17,6 +37,7 @@ socket.on('newMessage', function(message) {
   })
 
   $('#messages').append(html);
+  scrollToBottom();
 });
 
 $("#message-form").on('submit', function(e) {
@@ -49,7 +70,6 @@ locationButton.on('click', function() {
     alert('Unable to fetch location.')
   })
 });
-
 socket.on('newLocationMessage', function(message) {
   var formattedTime = moment(message.createdAt).format('h:mm a');
   var template = $('#location-message-template').html();
@@ -60,4 +80,5 @@ socket.on('newLocationMessage', function(message) {
   })
 
   $('#messages').append(html);
+  scrollToBottom();
 });
