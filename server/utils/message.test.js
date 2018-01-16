@@ -13,7 +13,6 @@ describe('generateMessage', () => {
     expect(typeof message.createdAt).toBe('number');
     expect(message).toInclude({ text, from });
 
-
   });
 });
 
